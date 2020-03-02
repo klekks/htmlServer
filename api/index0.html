@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang=ru dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <!--<link rel="stylesheet" href="css/tgl.css">-->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!--<link rel="stylesheet" href="css/main-input.css">-->
+    <title>API SUA.SU</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  </head>
+  <body>
+    <div class = "header">
+        <div class="center header-container">
+          <div class = "main-container">
+            <div class="title-container">
+                <a href="https://sua.su"><h1>ShortUrlApp</h1></a>
+            </div>
+            <div class="login-panel">
+              <div class="login bigbutton"><h3>Вход</h3></div>
+              <div class="signup bigbutton"><h3>Регистрация</h3></div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="topback">
+      <div class="back" style="height:1100px;">
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
+        <div class = "body">
+              <h1 align=center>API</h1>
+              <p>Сервис sua.su предоставляет открытый доступ к своему API, с помощью которого можно создавать сокращенные ссылки удаленно.</p>
+              <p>Доступ к API серверу осуществляется по протоколу http(-s) на домене api.sua.su. На каждый запрос отправляется JSON. Среди полей в ответе сервера есть "code", в котором передается код ответа сервера, и поле "status", где на человекопонятном языке описывается код сервера.</p>
+              <p>Перед использованием сервиса необходимо получить ключ доступа (token) с помощью запроса к методу user.token</p>
+              <p>Пример запроса на получение токена: https://api.sua.su/user.token</p>
+              <p>В ответ на такой запрос сервер вернет JSON с двумя полями: token - сам ключ доступа и deleteTime - время действия ключа в секундах (обычно 7 дней)</p>
+              <p></p>
+              <p>После получения ключа доступа можно взаимодействовать с остальными методами API</p>
+              <p></p>
+              <p>Для сокращения ссылки используйте метод url.set. Этот метод принимает два обязательных параметра (token - ключ доступа, url - сокращаемая ссылка) и четыре необязательных (secure - защитить ссылку паролем или нет (либо 0, либо 1, если 1, то в аргументе pass передается пароль), stat - собирать ли статистику переходов (0 или 1), time - время действия ссылки в секундах, по умолчанию 50 лет)</p>
+              <p>Коды ответов сервера:</p>
+              <p>0 : "OK" : Операция прошла успешно.</p>
+              <p>11 : "No "url" passed" : Не передана сокращаемая ссылка</p>
+              <p>12 : "No "token" passed" : Не передан ключ доступа</p>
+              <p>13 : "No "url" and "token" passed" : Ни ключб ни ссылка не переданы</p>
+              <p>14 : "Invalid URL" : некорректная ссылка</p>
+              <p>15 : "Invalid Token" : некорректный ключ</p>
+              <p>16 : "Forbidden" : доступ запрещен</p>
+              <p>17 : "Token is stale" : Срок действия ключа доступа истек</p>
+              <p>18 : "No "pass" passed" : Не передан пароль</p>
+              <p>19 : "Password too short" : Пароль короче 4 символов</p>
+              <p>20 : "Invalid time" : Некорректный формат времени</p>
+        </div>
+      </div>
+
+    <div class="footer back" style="height: 120px;">
+      <div id='stars'></div>
+      <div id='stars2'></div>
+      <div id='stars3'></div>
+      <div class="c">
+        <h3>Powered by <a href="https://nginx.org/">Nginx</a></h3>
+        <a href="/api" style="margin-left:15%"><h3>API</h3></a>
+        <h3 style="margin-left:15%">Author: <a href="https://vk.com/klekks">Ilya Petrov</a></h3>
+      </div>
+    </div>
+    </div>
+    <style>
+      .footer {
+        box-shadow: 0 -6px 12px rgba(0,0,0,0.3);
+      }
+      .body h1 {
+        font-size: 64px;
+        color: white;
+        margin-top: 2%;
+        margin-bottom: 2%;
+      }
+      .body p {
+        font-size: 20px;
+        color:white;
+        margin-top: 1.5%;
+
+      }
+      .body {
+        overflow: auto;
+        position: relative;
+        display: block;
+        width: 70%;
+        height: 1000px;
+        background-color: rgba(0,0,0,0.35);
+        margin: 68px auto;
+        padding-top: 1.5%;
+        padding-left: 2%;
+        padding-right: 4%;
+      }
+      body {
+        font-family: museo;
+        text-shadow: -3px 4px 4px rgba(0,0,0,0.5);
+      }
+    </style>
+  </body>
+</html>

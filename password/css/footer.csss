@@ -1,0 +1,21 @@
+.c a {
+  color:#fb9520;
+}
+.c {
+  margin-left: 33%;
+  margin-top: 2%;
+  display: inline;
+  position: absolute;
+  width: 550px;
+}
+.c h3 {
+  font-family: museo;
+  font-size: 20px;
+  color: white;
+  text-shadow: -3px 4px 4px rgba(0,0,0,0.5);
+  position: relative;
+  display: inline-block;
+}
+.footer {
+  min-height: 120px;
+}

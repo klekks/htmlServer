@@ -1,0 +1,48 @@
+.page h3 {
+  font-size: 42px;
+  font-family: museo;
+  color: #757575;
+  text-shadow: 0 0 4px rgba(0,0,0,0.3);
+  position: absolute;
+  display: inline-block;
+  margin-top: 57%;
+}
+.page p {
+  font-size: 18px;
+  font-family: museo;
+  color: #707070;
+  position:absolute;
+  margin-top: 80%;
+}
+.page-img {
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  margin-left: 26%;
+  margin-top: 8%;
+}
+.page-container {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 10%;
+}
+.page {
+  width: 280px;
+  height: 400px;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  border-radius: 10px;
+  box-shadow: -5px 3px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition-duration: 800ms;
+  transition-property: background-color, box-shadow;
+  transition-timing-function: ease;
+}
+.page:hover {
+  box-shadow: -5px 3px 12px rgba(0,0,0,0.5);
+}

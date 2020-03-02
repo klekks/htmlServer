@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang=ru dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Надоели огромные и неудобные ссылки? Выход есть! SUA поможет сократить вашу ссылку и, если нужно, защитит ее паролем и соберет статистику."/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/tgl.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main-input.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://sua.su"/>
+    <title>Сокращение ссылок</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script>
+    var Pass;
+    function isValidUrl(url)
+    {
+      var objRE = /^(https?:\/\/)?([а-яА-Яa-zA-Z0-9\:\.\/\&\^\-]{1,128})[^\s@]*$/i;
+      return objRE.test(url);
+    }
+    function lengthError () {
+      $(".Error")[0].style.display = "block";
+    }
+    function notLengthError () {
+      $(".Error")[0].style.display = "none";
+    }
+    function checkError () {
+      $(".Error")[1].style.display = "block";
+    }
+    function notCheckError () {
+      $(".Error")[1].style.display = "none";
+    }
+    function getpass() {
+        	pass = $(".passinput")[0].value;
+        	pass2 = $(".passinput")[1].value;
+          notCheckError();
+          notLengthError();
+        	if (pass == pass2 && pass.length > 3) {
+        		Pass = pass;
+            return true;
+            } else {
+              if (pass.length <= 3 && pass.length != 0) {
+                lengthError();
+              }
+              if (pass != pass2) {
+                checkError();
+              }
+            }
+        }
+  </script>
+  </head>
+  <body>
+
+    <div class="mainback">
+      <div class="main">
+        <div class="close"></div>
+        <div class="ok">
+          <img src="https://www.clipartmax.com/png/full/157-1575752_open-portrait-of-a-man.png"/>
+        </div>
+        <div class="surl">
+          <h3>Ваша ссылка готова:</h3>
+          <input type="text" placeholder="  https/sua.su/suasu" id=surl />
+          <button id=buff onclick=bufferd>Скопировать</button>
+        </div>
+        <div class="qr">
+          <img id=qr src="https://chart.apis.google.com/chart?choe=UTF-8&chld=L&cht=qr&chs=200x200&chl=vk.com" />
+        </div>
+      </div>
+    </div>
+    <style>
+    #raise {
+    position: absolute;
+    font-family: museo;
+    font-size: 31px;
+    margin-top: 110px;
+    color: #ff0c0c;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    display: none;
+    }
+    .surl button {
+      border-radius: 5px;
+      height: 34px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #c5c5c5;
+      background-color: #31c770;
+      cursor: pointer;
+      position: absolute;
+      margin-top: 23px;
+      margin-left: 8px;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0,0,0,.3);
+      font-family: museo;
+    }
+      .surl input {
+        margin-top: 5%;
+        margin-left: 10%;
+        width: 250px;
+        height: 30px;
+        border-radius: 5px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #444;
+        font-family: museo;
+        font-size: 20px;
+      }
+      .mainback {
+        width: 100%;
+        height: 968px;
+        position: absolute;
+        z-index: 4;
+        background-color: rgba(0,0,0,0.4);
+        cursor: pointer;
+        display: none;
+      }
+      .main {
+        width: 450px;
+        height: 600px;
+        background-color: white;
+        margin: 12% auto;
+        box-shadow: 2px 2px 11px rgba(0,0,0,0.6);
+        border-radius: 2px;
+      }
+      .mainback img {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 14% 26%;
+      }
+      .surl h3 {
+        font-size: 30px;
+        font-family: museo;
+        margin-left: 16%;
+        margin-top: -7%;
+      }
+      .qr img {
+        margin-top: 1%;
+      }
+    </style>
+
+    <div class = "header">
+        <div class="center header-container">
+          <div class = "main-container">
+            <div class="title-container">
+                <a href="https://sua.su"><h2>ShortUrlApp</h2></a>
+            </div>
+            <div class="login-panel">
+              <!--<div class="login bigbutton"><h3>Вход</h3></div>-->
+              <div class="signup bigbutton"><h3>&beta;-версия</h3></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="topback">
+      <div class="back">
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
+        <div class="inputer">
+          <h2 id=raise>ОШИБКА</h2>
+          <input type="text" name="url" autofocus placeholder="Введите ссылку..." class = "input"/>
+          <img src="sh.png" class="sh"/>
+          <input type="button" name="surl" value="Сократить" class="url-button" onclick=""/>
+          <div class="inp">
+            <h2>Настройте свой URL:</h2>
+            <hr size="2px" width="180px" noshade="" color="#fb9520" class="hr">
+            <div class=inpc>
+              <div class='check'>
+                <input class="tgl tgl-light" id="cb1" type="checkbox"/>
+                <label class="tgl-btn" for="cb1"></label>
+                <h3>Защитить паролем</h3>
+              </div>
+              <div class="passcase">
+                <input type="password" name="pass" autofocus placeholder="Введите пароль" class = "passinput" onchange="getpass(this)"/>
+                <div class="Error">
+                  <h4><span>&#10006;</span> Минимум 4 символа</h4>
+                </div>
+                <input type="password" name="repass" autofocus placeholder="Повторите пароль" class = "passinput" onchange="getpass(this)"/>
+                <div class="Error">
+                  <h4><span>&#10006;</span> Пароли не совпадают</h4>
+                </div>
+              </div>
+              <div class='check'>
+                <input class="tgl tgl-light" id="cb2" type="checkbox"/>
+                <label class="tgl-btn" for="cb2"></label>
+                <h3>Собирать статистику</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "body">
+      <div class="title"><h1>Сокращение ссылок</h1></div>
+      <div class = "page-container">
+        <div class = "page">
+          <img src="api.png" class = "page-img"/>
+          <h3 style="margin-left: 36%;">API</h3>
+          <p align=center>API позволяет сокращать ссылки без перехода на сайт и предоставляет возможность получить подробную статистику переходов по ссылке</p>
+        </div>
+        <div class = "page">
+          <img src="url.png" class = "page-img"/>
+          <h3 style="margin-left: 25%;">Ссылки</h3>
+          <p align=center>SUA предоставляет неограниченное количество сокращений ссылок для всех</p>
+        </div>
+        <div class = "page">
+          <img src="stat.png" class = "page-img"/>
+          <h3 style="margin-left: 10%;">Статистика</h3>
+          <p align=center>У пользователей есть возможность собирать статистику переходов по ссылкам и просматривать ее на странице <br>sua.su/ссылка/statistics</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer back">
+      <div id='stars'></div>
+      <div id='stars2'></div>
+      <div id='stars3'></div>
+      <div class="c">
+        <h3>Powered by <a href="https://nginx.org/">Nginx</a></h3>
+        <a href="/api" style="margin-left:15%"><h3>API</h3></a>
+        <h3 style="margin-left:15%">Author: <a href="https://vk.com/klekks">Ilya Petrov</a></h3>
+      </div>
+    </div>
+  </body>
+  <style>
+  .title h1 {
+    font-family: museo;
+    color: #656565;
+    font-size: 40px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 4px 4px 6px rgba(0,0,0,0.3)
+  }
+  .title {
+    width: fit-content;
+    position: relative;
+    margin: 0px auto;
+  }
+  .body {
+    background-color: rgb(238, 238, 238);
+    min-height: 600px;
+    box-shadow: 0 -6px 12px rgba(0,0,0,0.3);
+    padding-top: 30px;
+}
+  </style>
+  <script>
+  var headHeight = 80;
+  var backHeight = 300;
+  $("img")[2].onclick = rotation;
+  function url_center () {
+    input = $("input")[1];
+    input1 = $("input")[2];
+    img = $("img")[2];
+    input.style.marginTop = headHeight/2 + (backHeight - input.clientHeight)/2 + "px";
+    input1.style.marginTop = headHeight/2 + (backHeight - input.clientHeight)/2 + "px";
+    img.style.marginTop = headHeight/2 + backHeight/2 - img.clientHeight/2 + 3 + "px";
+    img.style.marginLeft = (window.innerWidth - input1.clientWidth)/2 + input.clientWidth/2 - 45 +"px";
+    input.style.marginLeft = (window.innerWidth - input.clientWidth - input1.clientWidth)/2 + "px";
+    input1.style.marginLeft = (window.innerWidth - input1.clientWidth)/2 + input.clientWidth/2 + 4 +"px";
+    $(".login-panel")[0].style.marginLeft = $(".header-container")[0].clientWidth - $(".login-panel")[0].clientWidth - 20 + "px";
+    $(".inp")[0].style.marginTop = headHeight/2 + (backHeight - input.clientHeight)/2 + 100 + "px";
+    $(".inp")[0].style.marginLeft = input.style.marginLeft;
+    $(".page-container")[0].style.marginLeft = (window.innerWidth - $(".page-container")[0].clientWidth)/2 + "px";
+    $(".c")[0].style.marginLeft = (window.innerWidth - $(".c")[0].clientWidth)/2 + "px";
+    $("#raise")[0].style.marginLeft = (window.innerWidth - $("#raise")[0].clientWidth)/2 + "px";
+  }
+  url_center ();
+  $(window).resize(url_center);
+  $("#buff")[0].onclick = bufferd;
+  function rotation () {
+    noRaise();
+  	$("img")[2].classList += " rotation";
+  	$(".back")[0].style.height = 520 + "px";
+  	setTimeout("$(\"img\")[2].classList = \"sh\";", 1500);
+    $("img")[2].onclick = derotation;
+    //$(".inp")[0].style.display = "inline-block";
+    $(".inp")[0].style.opacity = "1";
+    if ($(".tgl-btn")[0].onclick == delPasswordSpace) {
+      $(".back")[0].style.height = 720 + "px";
+    }
+  }
+
+  function derotation () {
+    noRaise();
+  	$("img")[2].classList += " rotation";
+  	$(".back")[0].style.height = 350 + "px";
+  	setTimeout("$(\"img\")[2].classList = \"sh\";", 1500);
+    $("img")[2].onclick = rotation;
+    //$(".inp")[0].style.display = "none";
+    $(".inp")[0].style.opacity = "0";
+  }
+  $(".mainback")[0].onclick = modalOff;
+  $(".main")[0].onclick = function (e) {e.stopPropagation();};
+  function bufferd () {
+
+      var copyLink = document.querySelector('#surl');
+      var range = document.createRange();
+      range.selectNode(copyLink);
+      window.getSelection().addRange(range);
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copy email command was ' + msg);
+      } catch(err) {
+        console.log('Oops, unable to copy');
+      }
+      window.getSelection().removeAllRanges();
+  }
+
+
+  var copybtn = document.querySelector('#buff');
+  copybtn.addEventListener('click', bufferd);
+
+
+  function addPasswordSpace () {
+    noRaise();
+  	back = $(".back")[0];
+  	stat = $(".check")[1];
+  	h = back.clientHeight;
+  	back.style.height =  h + 200 + "px";
+  	$(".tgl-btn")[0].onclick = delPasswordSpace;
+    $(".passcase")[0].style.display = "inline-block";
+    $(".passcase")[0].style.opacity = "1";
+    $(".passcase")[0].style.marginTop = "0%";
+ }
+
+  function delPasswordSpace () {
+  	back = $(".back")[0];
+  	stat = $(".check")[1];
+  	h = back.clientHeight;
+  	back.style.height =  h - 200 + "px";
+    $(".tgl-btn")[0].onclick = addPasswordSpace;
+    $(".passcase")[0].style.display = "none";
+    $(".passcase")[0].style.opacity = "0";
+    $(".passcase")[0].style.marginTop = "-15%"
+  }
+  var ans;
+  $(".tgl-btn")[0].onclick = addPasswordSpace;
+  function answerUrl () {
+    ans = JSON.parse(globalReq.response);
+    if (ans.code == 0) {
+      $("#qr")[0].src = "https://chart.apis.google.com/chart?choe=UTF-8&chld=L&cht=qr&chs=200x200&chl=" + ans.shortUrl;
+      $("#surl")[0].value = ans.shortUrl;
+      modalOn();
+    }
+  }
+
+  function modalOn() {
+    $(".mainback")[0].style.display = "block";
+  }
+
+  function modalOff() {
+    $(".mainback")[0].style.display = "none";
+  }
+
+  var token;
+  getToken();
+  function getToken() {
+  	req = new XMLHttpRequest();
+  	req.open("GET", "https://api.sua.su/user.token", true);
+  	req.onloadend = tokenator;
+  	req.send();
+  }
+
+  function raiseUrl () {
+    $("#raise")[0].innerText = "Некорректный URL";
+    $("#raise")[0].style.display = "inline-block";
+    url_center();
+  }
+
+  function raisePass () {
+    $("#raise")[0].innerText = "Некорректный пароль";
+    $("#raise")[0].style.display = "inline-block";
+    url_center();
+    rotation();
+  }
+
+  function noRaise () {
+    $("#raise")[0].style.display = "none";
+  }
+
+  function tokenator() {
+  	token = JSON.parse(req.response)["token"];
+  }
+  var globalReq;
+  $("input")[2].onclick = function () {
+    noRaise();
+    derotation();
+    secure = $("#cb1")[0].checked;
+    stats = $("#cb2")[0].checked;
+    url = $("input")[1].value;
+    if ((secure && getpass()) || !secure) {
+      if (isValidUrl(url)) {
+        url = "https://api.sua.su/url.set?token=" + token + "&url=" + url;
+        if (stats) {
+          url += "&stats=1"
+        }
+        if (secure) {
+          url += "&secure=1" + "&pass=" + pass;
+        }
+        globalReq = new XMLHttpRequest();
+        globalReq.open("GET", url, true);
+        globalReq.onloadend = answerUrl;
+        globalReq.send()
+      }
+      else {raiseUrl();}
+    } else {raisePass();}
+  }
+
+  function get_url () {
+    u = $(".url-button")[0];
+  }
+  </script>
+</html>
